@@ -262,6 +262,11 @@ static int setup_fdt(struct kvm *kvm)
 			       riscv_irqchip_phandle));
 	_FDT(fdt_property(fdt, "ranges", NULL, 0));
 
+	_FDT(fdt_begin_node(fdt, "imsic-test"));
+	_FDT(fdt_property_string(fdt, "compatible", "imsic,test"));
+	_FDT(fdt_property_cell(fdt, "msi-parent", riscv_irqchip_msi_phandle));
+	_FDT(fdt_end_node(fdt));
+
 	/* Virtio MMIO devices */
 	dev_hdr = device__first_dev(DEVICE_BUS_MMIO);
 	while (dev_hdr) {
